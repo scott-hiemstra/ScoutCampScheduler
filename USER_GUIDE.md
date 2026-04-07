@@ -27,7 +27,7 @@ Instead of competing with other unit leaders for activity slots in real time, th
 
 Open your web browser and navigate to the application URL (typically `http://localhost:8080`). You'll see the **Dashboard** with a summary of units, scouts, activities, and assignments.
 
-<!-- SCREENSHOT: Dashboard page showing stat cards -->
+![Dashboard](docs/screenshots/dashboard.png)
 
 The navigation bar at the top provides access to all sections:
 
@@ -48,7 +48,7 @@ Navigate to **Units** to create your Scout unit.
 1. Enter your unit name (e.g., "Troop 123") in the text field
 2. Click **Add Unit**
 
-<!-- SCREENSHOT: Units page with the add form and unit list -->
+![Units page](docs/screenshots/units.png)
 
 Each unit in the list has three action buttons:
 
@@ -66,7 +66,7 @@ Navigate to **Scouts** to add scouts to your unit.
 2. Select the unit from the dropdown
 3. Click **Add Scout**
 
-<!-- SCREENSHOT: Scouts page showing the add form and a unit's scout list -->
+![Scouts page](docs/screenshots/scouts.png)
 
 Scouts are displayed grouped by unit. Each scout has action buttons:
 
@@ -80,7 +80,7 @@ Scouts are displayed grouped by unit. Each scout has action buttons:
 
 Click the **Preferences** button next to a scout's name to set their merit badge preferences.
 
-<!-- SCREENSHOT: Preferences page with ranked activity dropdowns -->
+![Preferences page](docs/screenshots/preferences.png)
 
 ### How Preferences Work
 
@@ -103,7 +103,7 @@ Preferences are **ranked by priority** — the first preference is most importan
 
 At the bottom of the Preferences page, you'll see a **Fill Schedule** checkbox.
 
-<!-- SCREENSHOT: Fill Schedule checkbox on preferences page -->
+![Fill Schedule checkbox](docs/screenshots/preferences.png)
 
 When enabled:
 
@@ -121,7 +121,7 @@ This is ideal for scouts who want a full schedule but don't have strong preferen
 
 Navigate to **Activities** to browse the full catalog of available merit badges and program area sessions.
 
-<!-- SCREENSHOT: Activities page showing the activity table -->
+![Activities page](docs/screenshots/activities.png)
 
 Each activity listing shows:
 
@@ -161,7 +161,7 @@ Each activity listing shows:
 
 Navigate to **Schedule** and click **Run Auto-Scheduler**.
 
-<!-- SCREENSHOT: Schedule page with the Run button highlighted -->
+![Schedule page](docs/screenshots/schedule.png)
 
 ### What the Scheduler Does
 
@@ -184,7 +184,7 @@ You can **filter by unit** using the dropdown at the top of the schedule page.
 
 ## Working with the Schedule
 
-<!-- SCREENSHOT: Schedule page with assignments listed -->
+![Schedule assignments](docs/screenshots/schedule.png)
 
 ### Locking Assignments
 
@@ -215,7 +215,7 @@ Click **Clear Unlocked** to remove all non-locked assignments. To start complete
 
 From the **Scouts** page, click the **Schedule** button next to any scout to see their personal weekly grid.
 
-<!-- SCREENSHOT: Individual scout schedule grid -->
+![Scout schedule grid](docs/screenshots/scout-schedule.png)
 
 The grid displays:
 
@@ -232,7 +232,7 @@ This view matches the layout of the official camp schedule PDF.
 
 From the **Units** page, click **Schedules** to see every scout's weekly grid on one page.
 
-<!-- SCREENSHOT: Unit schedules overview page showing multiple scout grids -->
+![Unit schedules overview](docs/screenshots/unit-schedules.png)
 
 Each scout gets their own card with a compact schedule grid and a **View Full** link to jump to their individual detail view.
 
@@ -244,7 +244,7 @@ This is useful for printing or reviewing the full unit's schedule at a glance.
 
 From the **Units** page, click **Roster** to see the "Where Are My Scouts?" report.
 
-<!-- SCREENSHOT: Unit roster report grouped by time block -->
+![Unit roster report](docs/screenshots/unit-roster.png)
 
 The report is organized by:
 

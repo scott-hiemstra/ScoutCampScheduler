@@ -6,13 +6,15 @@ Built as a proof-of-concept for the **2026 Scouts BSA Activity Schedule**.
 
 ## The Problem
 
-At many Scouts BSA summer camps, merit badge scheduling is done through platforms like [Scoutingevent.com](https://scoutingevent.com), where all unit leaders register for activity slots **at the same time**. This creates a race condition: leaders are fighting each other for limited spots, refreshing pages, and scrambling to piece together workable schedules for their scouts.
+[Scoutingevent.com](https://scoutingevent.com) does a great job handling summer camp registration — it's a fully functional platform that councils and camps rely on, and it works. But when it comes to merit badge scheduling, the current model puts unit leaders in a tough spot: everyone registers for activity slots **at the same time**, creating a free-for-all. Leaders are fighting each other for limited spots, refreshing pages, and scrambling to piece together workable schedules for their scouts.
 
 For larger units this is especially painful — a leader with 30+ scouts has to manually juggle dozens of preferences, time conflicts, and capacity limits while competing with every other unit for the same openings.
 
+There has to be a better way.
+
 ## A Better Approach
 
-Instead of making unit leaders fight for slots in real time, this application proposes a **preference-based auto-scheduling** model:
+Instead of making unit leaders fight for slots in real time, this application explores a **preference-based auto-scheduling** model:
 
 1. **Scouts submit ranked preferences** — "I want Swimming 1st, Rifle Shooting 2nd, Robotics 3rd"
 2. **An algorithm assigns everyone at once** — respecting capacity limits, time conflicts, and preference priority
@@ -21,7 +23,7 @@ Instead of making unit leaders fight for slots in real time, this application pr
 
 This eliminates the competitive scramble, produces fairer results, and saves unit leaders hours of manual scheduling work.
 
-> **This project is a feature proposal for [Scoutingevent.com](https://scoutingevent.com)** — demonstrating how preference-based auto-scheduling could replace the current first-come-first-served approach.
+> **This is a proof of concept, not a replacement for Scoutingevent.com.** It doesn't aim to replicate the full functionality of that platform — registration, payments, roster management, and everything else Scoutingevent handles well. This project focuses on one thing: demonstrating that preference-based auto-scheduling could be a better way to handle merit badge sign-ups, and proposing it as a feature for platforms like Scoutingevent.
 
 ## Features
 
