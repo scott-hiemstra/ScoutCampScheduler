@@ -112,8 +112,6 @@ ScoutCampScheduler/
 
 This is an open-source proof-of-concept. Contributions, feedback, and ideas are welcome — please open an issue or pull request.
 
-If you're involved with Scouting America or camp administration and interested in this approach, we'd love to hear from you.
-
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
