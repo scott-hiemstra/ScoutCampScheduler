@@ -1,0 +1,66 @@
+{{template "header" .}}
+
+<h1>Preferences for {{.Scout.Name}}</h1>
+<p class="subtitle">Unit: {{.Scout.UnitName}} &middot; <a href="/scouts">&larr; Back to Scouts</a></p>
+
+<div class="card">
+    <h2>Activity Preferences</h2>
+    <p>Select up to 6 activities in order of priority. The scheduler will try to honor higher-priority choices first.</p>
+
+    <form method="POST" action="/scouts/{{.Scout.ID}}/preferences">
+        <div class="pref-list" id="prefList">
+            {{range $i, $p := .Preferences}}
+            <div class="pref-row">
+                <span class="pref-num">{{add $i 1}}.</span>
+                <select name="activity" class="pref-select">
+                    <option value="">-- Select Activity --</option>
+                    {{range $.ActivityNames}}
+                    <option value="{{.}}" {{if eq . $p.ActivityName}}selected{{end}}>{{.}}</option>
+                    {{end}}
+                </select>
+                <button type="button" class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">&#10005;</button>
+            </div>
+            {{end}}
+        </div>
+
+        <button type="button" class="btn btn-secondary" id="addPrefBtn" style="margin-top:0.5rem">+ Add Preference</button>
+
+        <div class="fill-schedule-option" style="margin-top:1rem; padding:0.75rem; background:#f8f9fa; border-radius:4px;">
+            <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                <input type="checkbox" name="fill_schedule" {{if .FillSchedule}}checked{{end}}>
+                <strong>Fill remaining schedule</strong>
+            </label>
+            <p style="margin:0.25rem 0 0 1.75rem; color:#666; font-size:0.9rem;">
+                After preferred activities are assigned, automatically fill empty time blocks with other available activities. Buddy pairing with unit-mates is still prioritized.
+            </p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:1rem">Save Preferences</button>
+    </form>
+</div>
+
+<script>
+const activityNames = [{{range .ActivityNames}}"{{.}}",{{end}}];
+const prefList = document.getElementById('prefList');
+const addBtn = document.getElementById('addPrefBtn');
+
+addBtn.addEventListener('click', function() {
+    const count = prefList.children.length;
+    if (count >= 8) { alert('Maximum 8 preferences'); return; }
+    const div = document.createElement('div');
+    div.className = 'pref-row';
+    let opts = '<option value="">-- Select Activity --</option>';
+    activityNames.forEach(n => { opts += '<option value="'+n+'">'+n+'</option>'; });
+    div.innerHTML = '<span class="pref-num">'+(count+1)+'.</span>' +
+        '<select name="activity" class="pref-select">'+opts+'</select>' +
+        '<button type="button" class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">&#10005;</button>';
+    prefList.appendChild(div);
+});
+
+// Add initial empty rows if none exist
+if (prefList.children.length === 0) {
+    for (let i = 0; i < 4; i++) addBtn.click();
+}
+</script>
+
+{{template "footer" .}}

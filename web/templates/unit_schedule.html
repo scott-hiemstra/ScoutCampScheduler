@@ -1,0 +1,59 @@
+{{template "header" .}}
+
+<h1>{{.Unit.Name}}</h1>
+<p class="subtitle">All Scout Schedules</p>
+
+{{if .Grids}}
+{{range .Grids}}
+<div class="card">
+    <div class="unit-sched-header">
+        <h2>{{.Scout.Name}}</h2>
+        <a href="/scouts/{{.Scout.ID}}/schedule" class="btn btn-sm btn-secondary">View Full</a>
+    </div>
+    <table class="schedule-grid schedule-grid-compact">
+        <thead>
+            <tr>
+                <th class="sg-corner"></th>
+                <th class="sg-col-header">Mon / Tue</th>
+                <th class="sg-col-header">Wed / Thu</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Rows}}
+            <tr class="sg-row{{if .IsLunch}} sg-lunch-row{{end}}">
+                {{if .IsLunch}}
+                <td class="sg-row-label sg-lunch-label">Lunch</td>
+                {{else}}
+                <td class="sg-row-label">{{.Label}}<br><span class="sg-time">{{.TimeInfo}}</span></td>
+                {{end}}
+                {{range .Cells}}
+                    {{if not .Skip}}
+                        {{if .IsBreak}}
+                        <td class="sg-cell sg-break-cell"></td>
+                        {{else if .IsEmpty}}
+                        <td class="sg-cell sg-empty">&mdash;</td>
+                        {{else}}
+                        <td rowspan="{{.RowSpan}}" class="sg-cell sg-filled" style="background-color: {{.Color}}20; border-left: 4px solid {{.Color}};">
+                            <div class="sg-activity">{{.Activity}}</div>
+                            <div class="sg-area" style="color: {{.Color}};">{{.Area}}</div>
+                        </td>
+                        {{end}}
+                    {{end}}
+                {{end}}
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+{{else}}
+<div class="card">
+    <p class="empty-state">No scouts in this unit yet.</p>
+</div>
+{{end}}
+
+<div style="margin-top: 1rem;">
+    <a href="/units" class="btn btn-secondary">&larr; Back to Units</a>
+</div>
+
+{{template "footer" .}}

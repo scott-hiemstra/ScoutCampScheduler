@@ -1,0 +1,31 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Camp Scheduler</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">&#9978; Summer Camp Scheduler</div>
+    <div class="nav-links">
+        <a href="/" class="{{if eq .Page "dashboard"}}active{{end}}">Dashboard</a>
+        <a href="/units" class="{{if eq .Page "units"}}active{{end}}">Units</a>
+        <a href="/scouts" class="{{if eq .Page "scouts"}}active{{end}}">Scouts</a>
+        <a href="/activities" class="{{if eq .Page "activities"}}active{{end}}">Activities</a>
+        <a href="/schedule" class="{{if eq .Page "schedule"}}active{{end}}">Schedule</a>
+    </div>
+</nav>
+<main class="container">
+{{end}}
+
+{{define "footer"}}
+</main>
+<footer class="footer">
+    <p>2026 Scouts BSA Summer Camp Scheduler</p>
+</footer>
+</body>
+</html>
+{{end}}

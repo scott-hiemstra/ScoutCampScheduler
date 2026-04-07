@@ -1,0 +1,34 @@
+{{template "header" .}}
+
+<h1>{{.Unit.Name}}</h1>
+<p class="subtitle">Unit Roster &mdash; Where Are My Scouts?</p>
+
+{{if .Slots}}
+{{range .Slots}}
+<div class="card roster-slot">
+    <h2 class="roster-slot-title">{{.Label}}</h2>
+    {{range .Areas}}
+    <div class="roster-area-block" style="border-left: 4px solid {{.Color}}; padding-left: 0.75rem; margin-bottom: 0.75rem;">
+        <h3 class="roster-area-name" style="color: {{.Color}};">{{.Name}}</h3>
+        {{range .Activities}}
+        <div class="roster-activity-line">
+            <span class="roster-act-name">{{.Name}}</span>
+            <span class="roster-scouts">{{range $i, $s := .Scouts}}{{if $i}}, {{end}}{{$s}}{{end}}</span>
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+</div>
+{{end}}
+{{else}}
+<div class="card">
+    <p class="empty-state">No assignments yet. Run the scheduler first!</p>
+</div>
+{{end}}
+
+<div style="margin-top: 1rem;">
+    <a href="/units" class="btn btn-secondary">&larr; Back to Units</a>
+    <a href="/units/{{.Unit.ID}}/schedule" class="btn btn-secondary">&#128197; Schedules</a>
+</div>
+
+{{template "footer" .}}

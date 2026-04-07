@@ -1,0 +1,39 @@
+{{template "header" .}}
+
+<h1>Dashboard</h1>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">{{index .Stats "units"}}</div>
+        <div class="stat-label">Units</div>
+        <a href="/units" class="stat-link">Manage &rarr;</a>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{index .Stats "scouts"}}</div>
+        <div class="stat-label">Scouts</div>
+        <a href="/scouts" class="stat-link">Manage &rarr;</a>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{index .Stats "activities"}}</div>
+        <div class="stat-label">Activities</div>
+        <a href="/activities" class="stat-link">View &rarr;</a>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{index .Stats "assignments"}}</div>
+        <div class="stat-label">Assignments</div>
+        <a href="/schedule" class="stat-link">View Schedule &rarr;</a>
+    </div>
+</div>
+
+<div class="card" style="margin-top:2rem">
+    <h2>Quick Start</h2>
+    <ol class="quick-start">
+        <li><a href="/units">Add your Scout units</a> (troops, patrols, etc.)</li>
+        <li><a href="/scouts">Add scouts</a> to each unit</li>
+        <li>Set <strong>preferences</strong> for each scout (click the preferences icon next to a scout)</li>
+        <li>Go to <a href="/schedule">Schedule</a> and click <strong>Run Auto-Scheduler</strong></li>
+        <li>Review and adjust assignments as needed</li>
+    </ol>
+</div>
+
+{{template "footer" .}}

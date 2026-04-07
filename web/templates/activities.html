@@ -1,0 +1,41 @@
+{{template "header" .}}
+
+<h1>Activities</h1>
+<p class="subtitle">All merit badges and activities from the 2026 schedule</p>
+
+{{range .ProgramAreas}}
+<div class="card">
+    <h2 style="border-left: 4px solid {{.Color}}; padding-left: 0.5rem;">{{.Name}}</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Activity</th>
+                <th>Block</th>
+                <th>Half-Week</th>
+                <th>Capacity</th>
+                <th>Enrolled</th>
+                <th>Prereqs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{$areaName := .Name}}
+            {{range $.Activities}}
+            {{if eq .ProgramAreaName $areaName}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td><span class="block-badge">{{.TimeBlockName}}</span></td>
+                <td>{{.HalfWeek}}</td>
+                <td>{{.Capacity}}</td>
+                <td>
+                    <span class="{{if ge .Enrolled .Capacity}}text-danger{{end}}">{{.Enrolled}}</span>
+                </td>
+                <td>{{if .HasPrerequisites}}&#9888; Yes{{else}}-{{end}}</td>
+            </tr>
+            {{end}}
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+
+{{template "footer" .}}

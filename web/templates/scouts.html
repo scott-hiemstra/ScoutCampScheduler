@@ -1,0 +1,57 @@
+{{template "header" .}}
+
+<h1>Scouts</h1>
+
+<div class="card">
+    <h2>Add Scout</h2>
+    {{if .Units}}
+    <form method="POST" action="/scouts" class="inline-form">
+        <input type="text" name="name" placeholder="Scout name" required>
+        <select name="unit_id" required>
+            <option value="">Select unit...</option>
+            {{range .Units}}
+            <option value="{{.ID}}">{{.Name}}</option>
+            {{end}}
+        </select>
+        <button type="submit" class="btn btn-primary">Add Scout</button>
+    </form>
+    {{else}}
+    <p class="empty-state">Please <a href="/units">create a unit</a> first.</p>
+    {{end}}
+</div>
+
+{{range .Groups}}
+{{if .Scouts}}
+<div class="card">
+    <h2>{{.Unit.Name}}</h2>
+    <table class="data-table">
+        <thead>
+            <tr><th>Name</th><th style="width:300px">Actions</th></tr>
+        </thead>
+        <tbody>
+            {{range .Scouts}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>
+                    <a href="/scouts/{{.ID}}/schedule" class="btn btn-sm btn-primary">&#128197; Schedule</a>
+                    <a href="/scouts/{{.ID}}/preferences" class="btn btn-sm btn-secondary">&#9734; Preferences</a>
+                    <form method="POST" action="/scouts/{{.ID}}/delete" class="inline"
+                          onsubmit="return confirm('Delete this scout?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+{{end}}
+
+{{if not .Groups}}
+<div class="card">
+    <p class="empty-state">No scouts yet.</p>
+</div>
+{{end}}
+
+{{template "footer" .}}

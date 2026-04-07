@@ -1,0 +1,97 @@
+{{template "header" .}}
+
+<h1>Schedule</h1>
+
+<div class="schedule-controls">
+    <form method="GET" action="/schedule" class="inline-form">
+        <select name="unit_id" onchange="this.form.submit()">
+            <option value="">All Units</option>
+            {{range .Units}}
+            <option value="{{.ID}}" {{if eq .ID $.SelectedUnit}}selected{{end}}>{{.Name}}</option>
+            {{end}}
+        </select>
+    </form>
+    <div class="btn-group">
+        <form method="POST" action="/schedule/run" class="inline">
+            <button type="submit" class="btn btn-primary">&#9654; Run Auto-Scheduler</button>
+        </form>
+        <form method="POST" action="/schedule/clear" class="inline"
+              onsubmit="return confirm('Clear all unlocked assignments?')">
+            <button type="submit" class="btn btn-danger">&#10005; Clear Unlocked</button>
+        </form>
+    </div>
+</div>
+
+{{if .Assignments}}
+<div class="card">
+    <table class="data-table schedule-table">
+        <thead>
+            <tr>
+                <th>Scout</th>
+                <th>Activity</th>
+                <th>Program Area</th>
+                <th>Block</th>
+                <th>Half-Week</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Assignments}}
+            <tr class="{{if .Locked}}row-locked{{end}}">
+                <td>{{.ScoutName}}</td>
+                <td><strong>{{.ActivityName}}</strong></td>
+                <td>{{.ProgramArea}}</td>
+                <td><span class="block-badge">{{.TimeBlock}}</span></td>
+                <td>{{.HalfWeek}}</td>
+                <td>
+                    {{if .Locked}}
+                    <span class="badge badge-locked">&#128274; Locked</span>
+                    {{else}}
+                    <span class="badge badge-unlocked">Unlocked</span>
+                    {{end}}
+                </td>
+                <td>
+                    <form method="POST" action="/assignments/{{.ID}}/lock{{if $.SelectedUnit}}?unit_id={{$.SelectedUnit}}{{end}}" class="inline">
+                        <button type="submit" class="btn btn-sm btn-secondary">
+                            {{if .Locked}}Unlock{{else}}Lock{{end}}
+                        </button>
+                    </form>
+                    {{if not .Locked}}
+                    <form method="POST" action="/assignments/{{.ID}}/delete{{if $.SelectedUnit}}?unit_id={{$.SelectedUnit}}{{end}}" class="inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                    {{end}}
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{else}}
+<div class="card">
+    <p class="empty-state">No assignments yet. Add scout preferences and run the auto-scheduler!</p>
+</div>
+{{end}}
+
+<div class="card">
+    <h2>Manual Assignment</h2>
+    <form method="POST" action="/assignments" class="inline-form">
+        <input type="hidden" name="unit_id" value="{{.SelectedUnit}}">
+        <select name="scout_id" required>
+            <option value="">Select scout...</option>
+            {{range .Scouts}}
+            <option value="{{.ID}}">{{.Name}} ({{.UnitName}})</option>
+            {{end}}
+        </select>
+        <select name="activity_id" required>
+            <option value="">Select activity...</option>
+            {{range .Activities}}
+            <option value="{{.ID}}">{{.Name}} ({{.ProgramAreaName}} / Block {{.TimeBlockName}} / {{.HalfWeek}}) [{{.Enrolled}}/{{.Capacity}}]</option>
+            {{end}}
+        </select>
+        <button type="submit" class="btn btn-primary">Assign</button>
+    </form>
+</div>
+
+{{template "footer" .}}

@@ -1,0 +1,41 @@
+{{template "header" .}}
+
+<h1>Scout Units</h1>
+
+<div class="card">
+    <h2>Add Unit</h2>
+    <form method="POST" action="/units" class="inline-form">
+        <input type="text" name="name" placeholder="Unit name (e.g. Troop 42)" required>
+        <button type="submit" class="btn btn-primary">Add Unit</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>All Units</h2>
+    {{if .Units}}
+    <table class="data-table">
+        <thead>
+            <tr><th>Name</th><th style="width:300px">Actions</th></tr>
+        </thead>
+        <tbody>
+            {{range .Units}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>
+                    <a href="/units/{{.ID}}/schedule" class="btn btn-sm btn-primary">&#128197; Schedules</a>
+                    <a href="/units/{{.ID}}/roster" class="btn btn-sm btn-secondary">&#128203; Roster</a>
+                    <form method="POST" action="/units/{{.ID}}/delete" class="inline"
+                          onsubmit="return confirm('Delete this unit and all its scouts?')">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="empty-state">No units yet. Add one above!</p>
+    {{end}}
+</div>
+
+{{template "footer" .}}
